@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            ROCK PAPER SCISSORS
+        </title>
+    </head>
+
+    <body>
+        <script>
+            function computerPlay() {
+                let play = ["rock", "paper", "scissor"];
+                return play[Math.floor(Math.random()*3)];
+            }
+
+            function playRound() {
+                let play = ["rock", "paper", "scissor"];
+                let userSelection = prompt("What's your play?");
+                userSelection = userSelection.toLowerCase();
+                if(play.indexOf(userSelection)==-1) {
+                    console.log("Wrong input");
+                    return -1;
+                }
+                let computerSelection = computerPlay();
+                let result = play.indexOf(userSelection)-play.indexOf(computerSelection);
+                let resultMessage;
+                if(result == 1 || result == -2) {
+                    console.log("You win! " + userSelection + " beats " + computerSelection);
+                    return 1;
+                }
+                else if(result == 0) {
+                    console.log("Draw " + userSelection + " and " + computerSelection);
+                    return -1;
+                }
+                else {
+                    console.log("You lose! " + computerSelection + " beats " + userSelection);
+                    return 0;
+                }
+
+                // console.log(userSelection);
+            }
+
+            function game() {
+                let i = 0;
+                let totalRound = 0;
+                let totalResult = 0;
+                let roundResult = 0;
+                
+
+                while(i<5) {
+                    roundResult = playRound();
+                    if(roundResult != -1) {
+                        totalResult += roundResult;
+                        i++;
+                    }
+                }
+
+                if(totalResult > 2) {
+                        console.log("You win!");
+                    }
+                    else {
+                        console.log("You lose!");
+                    }
+                
+            }
+
+            
+        </script>
+
+       
+        <button onclick="game()">play</button>
+
+    </body>
+</html>
