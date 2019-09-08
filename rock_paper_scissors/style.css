@@ -118,3 +118,8 @@ h1 {
     position: relative;
     right: 7px;
 }
+
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}

@@ -72,8 +72,11 @@ var playedRound = 0;
 var playerWins = 0;
 var computerWins = 0;
 startButton.addEventListener('click', () => {
-    startGame();
-    totalRound = roundInput.value;
+    if(roundInput.value>0) {
+        totalRound = roundInput.value;
+        startGame();
+    }
+    
 }
     );
 
