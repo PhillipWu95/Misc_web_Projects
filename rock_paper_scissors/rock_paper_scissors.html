@@ -1,74 +1,67 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel = "stylesheet" type = "text/css" href = "style.css">
         <title>
             ROCK PAPER SCISSORS
         </title>
+        
     </head>
 
     <body>
-        <script>
-            function computerPlay() {
-                let play = ["rock", "paper", "scissor"];
-                return play[Math.floor(Math.random()*3)];
-            }
 
-            function playRound() {
-                let play = ["rock", "paper", "scissor"];
-                let userSelection = prompt("What's your play?");
-                userSelection = userSelection.toLowerCase();
-                if(play.indexOf(userSelection)==-1) {
-                    console.log("Wrong input");
-                    return -1;
-                }
-                let computerSelection = computerPlay();
-                let result = play.indexOf(userSelection)-play.indexOf(computerSelection);
-                let resultMessage;
-                if(result == 1 || result == -2) {
-                    console.log("You win! " + userSelection + " beats " + computerSelection);
-                    return 1;
-                }
-                else if(result == 0) {
-                    console.log("Draw " + userSelection + " and " + computerSelection);
-                    return -1;
-                }
-                else {
-                    console.log("You lose! " + computerSelection + " beats " + userSelection);
-                    return 0;
-                }
+        <h1>Rock Paper Scissors</h1>
+ 
+        <div class="scoreBoard">
+            <div class="playerLabel">
+                <h2>Player Score</h2>
+            </div>
+            <div class="computerLabel">
+                <h2>Computer Score</h2>
+            </div>
+            <br>
+            <br>
+            <div class="playerScore">
+                <h2>0</h2>
+            </div>
+            <div class="vs">
+                <h2>VS</h2>
+            </div>
+            <div class="computerScore">
+                <h2>0</h2>
+            </div>
+        </div>
 
-                // console.log(userSelection);
-            }
+        <div class="startButton">
+            <label for="btn">Play <input id="roundNum" type="text" value="5"> Rounds</label>
+            <br>
+            <button id="btn">START</button>
+        </div>
 
-            function game() {
-                let i = 0;
-                let totalRound = 0;
-                let totalResult = 0;
-                let roundResult = 0;
-                
+        <div class="playSelect">
+            <div class="roundDisplay">
+                <h2>Round 1</h2>
+            </div>
+            <div class="playerSelection">
+                <button id="rock">Rock</button>
+                <button id="paper">Paper</button>
+                <button id="scissor">scissor</button>        
+            </div>
+            <div class="reset">
+                <button id="reset" onclick="window.location.reload()">Reset</button>
+            </div>
+        </div>
 
-                while(i<5) {
-                    roundResult = playRound();
-                    if(roundResult != -1) {
-                        totalResult += roundResult;
-                        i++;
-                    }
-                }
+        <div class="playDisplay">
+            <div id="playerPlay">
+                <h2>Rock</h2>
+            </div>
+            <div id="computerPlay">
+                <h2>Rock</h2>
+            </div>
+        </div>
 
-                if(totalResult > 2) {
-                        console.log("You win!");
-                    }
-                    else {
-                        console.log("You lose!");
-                    }
-                
-            }
-
-            
-        </script>
-
-       
-        <button onclick="game()">play</button>
 
     </body>
+    <script src='./scripts.js'></script>
 </html>
