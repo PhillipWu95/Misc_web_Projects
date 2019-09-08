@@ -1,5 +1,6 @@
 body {
     background: lightgreen;
+    overflow: scroll;
 }
 
 h1 {
