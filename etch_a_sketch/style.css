@@ -1,0 +1,13 @@
+.mainContent {
+    text-align: center;
+}
+
+.buttons {
+    display: flexbox;
+    margin: 0 auto;
+}
+
+.buttons button {
+    width: 100px;
+    height: 30px;
+}
