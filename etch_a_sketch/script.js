@@ -51,9 +51,6 @@ function setDrawingColor(component, color="white") {
     component.setAttribute("style", "background-color: " + color + ";");
 }
 
-function removeSetColor(component) {
-    component.removeEventListener("mouseover", setColor);
-}
 
 function initElements(gridSize) {
     let i;
@@ -67,7 +64,7 @@ function initElements(gridSize) {
             gridComponent.classList.add("gridComponent");
             gridComponent.addEventListener("mouseover", function setColor() {
                     setDrawingColor(gridComponent);   
-                    removeSetColor(gridComponent);
+                    gridComponent.removeEventListener("mouseover", setColor);
                 }
             );
             
