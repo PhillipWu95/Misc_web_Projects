@@ -110,4 +110,11 @@ newBtn.addEventListener('click', function newBtnEvent() {
         gridSize = prompt("Enter grid size: (in positive number please)");
     }
     allGridElements =  setGridSize(drawingPad, gridSize);
+    allGridElements.forEach((gridComponent) => {
+        gridComponent.setAttribute("style", "backgroud-color: black;");
+        gridComponent.addEventListener("mouseover", function setColor() {
+            setDrawingColor(gridComponent);
+            gridComponent.removeEventListener("mouseover", setColor);
+        });
+    });
 });
