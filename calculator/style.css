@@ -1,17 +1,23 @@
-.calculator {
-    display: grid;
-    grid-template-rows: 200px 200px;
-    grid-template-columns: 600px;
+body {
+    display: block;
 }
 
-.display {
-    grid-row-start: 1;
-    grid-row-end: 2;
-    background-color: aqua;
+
+.calculator {
+    /* display: grid; */
+    /* grid-template-rows: 200px 200px;
+    grid-template-columns: 600px; */
+    text-align: center;
+    
+    
 }
+
 
 .buttons {
     display: grid;
+    width: 600px;
+    height: 200px;
+    margin: 10px auto 0 auto;
     background-color: yellow;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
@@ -43,4 +49,30 @@
     grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 5;
+}
+
+
+.display {
+    height: 200px;
+    width: 600px;
+    display: grid;
+    grid-template-columns: 600px;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    margin: 0 auto;
+    background-color: aqua;
+    text-align: left;
+}
+
+#inputDisplay {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+#outputDisplay {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 4;
 }
