@@ -1,3 +1,5 @@
+//TODO negtive number
+
 function displayInput(component, field) {
     field.value = String(field.value) + component.textContent;
 }
@@ -28,7 +30,7 @@ function evaluate(eqn) {
     return leftValue;
 }
 console.log("hi");
-console.log(evaluate("-1/4"));
+console.log(evaluate("-1+4/√(2*2)^2"));
 
 function getOperator(inputString) {
     let remainedStr = inputString;
@@ -36,13 +38,27 @@ function getOperator(inputString) {
 }
 
 function getLeftValue(inputStr) {
-    let operationList = ["+","-","*","/","%","(",")"];
+    let operationList = ["+","-","*","/","%","(",")","^"];
     let returnValue=0;
     let valueStr="";
     let remainedStr = inputStr;
 
     if(remainedStr[0]=="(") {
         return getBracketValue(remainedStr.slice(1));
+    }
+
+    if(remainedStr[0]=="-") {
+        remainedStr = remainedStr.slice(1);
+        [returnValue, remainedStr] = getLeftValue(remainedStr);
+        returnValue = -returnValue;
+        return [returnValue, remainedStr];
+    }
+
+    if(remainedStr[0]=="√") {
+        remainedStr = remainedStr.slice(1);
+        [returnValue, remainedStr] = getLeftValue(remainedStr);
+        returnValue **= 0.5;
+        return [returnValue, remainedStr];
     }
 
     while(remainedStr != "" && operationList.indexOf(remainedStr[0])<0) {
@@ -69,7 +85,7 @@ function getRightValue(operator, inputStr) {
         returnValue = evaluate(inputStr);
         remainedStr = "";
     }
-    else if(operator == "*" || operator == "/") {
+    else if(operator == "*" || operator == "/" || operator == "^") {
         [returnValue, remainedStr] = getLeftValue(remainedStr);
     }
     else if(operator == "(") {
@@ -80,7 +96,7 @@ function getRightValue(operator, inputStr) {
 }
 
 function getBracketValue(inputStr) {
-    let returnValue = 0;
+
     let remainedStr = inputStr;
     let bracketCount = 1;
     let evalStr = "";
@@ -100,15 +116,14 @@ function getBracketValue(inputStr) {
         remainedStr = remainedStr.slice(1);
     } while(bracketCount != 0);
 
-    // evalStr = evalStr.slice(1);
-    // evalStr = evalStr.slice(0, -1);
+    
     return [evaluate(evalStr), remainedStr];
 
 }
 
 
 function excecuteOperation(leftValue, rightValue, operation) {
-    let operationList = ["+","-","*","/"];
+    
     let sum=0
     switch(operation) {
         case "+": 
@@ -123,6 +138,9 @@ function excecuteOperation(leftValue, rightValue, operation) {
         case "/": 
             sum = leftValue / rightValue;
             break;
+        case "^": 
+            sum = leftValue ** rightValue;
+            break;
         default:
             break;
     }
@@ -132,6 +150,7 @@ function excecuteOperation(leftValue, rightValue, operation) {
 
 
 const inputDisplay = document.querySelector("#inputDisplay input");
+const outputDisplay = document.querySelector("#outputDisplay p");
 const inputButtonList = document.querySelectorAll(".input");
 const functionButtonList = document.querySelectorAll(".function");
 const back = document.querySelector("#back");
@@ -152,4 +171,8 @@ back.addEventListener('click', function back() {
 
 cancel.addEventListener('click', function cancel() {
     inputDisplay.value = "";
+});
+
+equal.addEventListener('click', function equal() {
+    outputDisplay.textContent = parseFloat(evaluate(inputDisplay.value));
 });
